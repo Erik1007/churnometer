@@ -11,20 +11,20 @@ def predict_churn(X_live, churn_features, churn_pipeline_dc_fe, churn_pipeline_m
 
     # predict
     churn_prediction = churn_pipeline_model.predict(X_live_churn_dc_fe)
-    churn_prediction_proba = churn_pipeline_model.predict_proba(
-        X_live_churn_dc_fe)
+    churn_prediction_proba = churn_pipeline_model.predict_proba(X_live_churn_dc_fe)
     # st.write(churn_prediction_proba)
 
     # Create a logic to display the results
-    churn_prob = churn_prediction_proba[0, churn_prediction][0]*100
+    churn_prob = churn_prediction_proba[0, churn_prediction][0] * 100
     if churn_prediction == 1:
-        churn_result = 'will'
+        churn_result = "will"
     else:
-        churn_result = 'will not'
+        churn_result = "will not"
 
     statement = (
-        f'### There is {churn_prob.round(1)}% probability '
-        f'that this prospect **{churn_result} churn**.')
+        f"### There is {churn_prob.round(1)}% probability "
+        f"that this prospect **{churn_result} churn**."
+    )
 
     st.write(statement)
 
@@ -42,7 +42,7 @@ def predict_tenure(X_live, tenure_features, tenure_pipeline, tenure_labels_map):
     # st.write(tenure_prediction_proba)
 
     # create a logic to display the results
-    proba = tenure_prediction_proba[0, tenure_prediction][0]*100
+    proba = tenure_prediction_proba[0, tenure_prediction][0] * 100
     tenure_levels = tenure_labels_map[tenure_prediction[0]]
 
     if tenure_prediction != 1:
@@ -70,11 +70,12 @@ def predict_cluster(X_live, cluster_features, cluster_pipeline, cluster_profile)
     cluster_prediction = cluster_pipeline.predict(X_live_cluster)
 
     statement = (
-        f"### The prospect is expected to belong to **cluster {cluster_prediction[0]}**")
+        f"### The prospect is expected to belong to **cluster {cluster_prediction[0]}**"
+    )
     st.write("---")
     st.write(statement)
 
-  	# text based on "07 - Modeling and Evaluation - Cluster Sklearn" notebook conclusions
+    # text based on "07 - Modeling and Evaluation - Cluster Sklearn" notebook conclusions
     statement = (
         f"* Historically, **users in Clusters 0  don't tend to Churn** "
         f"whereas in **Cluster 1 a third of users churned** "
@@ -82,7 +83,7 @@ def predict_cluster(X_live, cluster_features, cluster_pipeline, cluster_profile)
     )
     st.info(statement)
 
-  	# text based on "07 - Modeling and Evaluation - Cluster Sklearn" notebook conclusions
+    # text based on "07 - Modeling and Evaluation - Cluster Sklearn" notebook conclusions
     statement = (
         f"* The cluster profile interpretation allowed us to label the cluster in the following fashion:\n"
         f"* Cluster 0 has user without internet, who is a low spender with phone\n"
